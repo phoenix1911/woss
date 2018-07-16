@@ -1,6 +1,9 @@
 package woss.client;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import com.briup.util.BIDR;
@@ -33,7 +36,8 @@ public class GatherImpl implements Gather {
 	 * */
 	@Override
 	public Collection<BIDR> gather() throws Exception {
-
+		List<BIDR> list = new ArrayList<>();
+		Map<>
 		return null;
 	}
 
