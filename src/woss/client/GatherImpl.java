@@ -81,7 +81,6 @@ public class GatherImpl implements Gather {
 
 			} else {
 				// 记录没下线的人
-
 				count++;
 			}
 
@@ -89,11 +88,7 @@ public class GatherImpl implements Gather {
 					+ bidr.getLogin_ip() + "上线时间: " + bidr.getLogin_date() + "下线时间: " + bidr.getLogout_date() + "上线时长: "
 					+ bidr.getTime_deration() + "秒");
 		}
-//		遍历map集合
-//		Set<Entry<String, Timestamp>> entrySet = map.entrySet();
-//		for (Entry<String, Timestamp> entry : entrySet) {
-//			System.out.println("entry:"+entry.getKey()+" "+entry.getValue());
-//		}
+
 		System.out.println("没下线的:" + count);
 		System.out.println(count2);
 		return list;
