@@ -98,7 +98,7 @@ public class GatherImpl implements Gather {
 		return list;
 	}
 
-	// test
+	// test 
 	public static void main(String[] args) {
 		GatherImpl gatherImpl = new GatherImpl();
 		try {
