@@ -9,11 +9,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Properties;
-import java.util.Set;
-
-import javax.print.attribute.standard.MediaPrintableArea;
 
 import com.briup.util.BIDR;
 import com.briup.woss.client.Gather;
@@ -37,6 +33,7 @@ public class GatherImpl implements Gather {
 		List<BIDR> list = new ArrayList<>();
 		Map<String, Timestamp> map = new HashMap<>();
 		int count = 0;
+		int count2 = 0;
 
 //		获取文件相对路径字节流对象
 		InputStream resourceAsStream = this.getClass().getResourceAsStream("/file/radwtmp1000");
@@ -63,7 +60,10 @@ public class GatherImpl implements Gather {
 				bidr.setLogin_date(new Timestamp(Long.valueOf(split[3]) * 1000));
 
 //				System.out.println("" + bidr.getLogin_ip() + "----------" + bidr.getLogin_date());
+				// list集合里的是所有上线的ip
 				list.add(bidr);
+				count2++;
+
 			}
 
 			// 下线 属性集合 ip和下线时间
@@ -81,7 +81,7 @@ public class GatherImpl implements Gather {
 
 			} else {
 				// 记录没下线的人
-				
+
 				count++;
 			}
 
@@ -95,10 +95,11 @@ public class GatherImpl implements Gather {
 //			System.out.println("entry:"+entry.getKey()+" "+entry.getValue());
 //		}
 		System.out.println("没下线的:" + count);
+		System.out.println(count2);
 		return list;
 	}
 
-	// test 
+	// test
 	public static void main(String[] args) {
 		GatherImpl gatherImpl = new GatherImpl();
 		try {
