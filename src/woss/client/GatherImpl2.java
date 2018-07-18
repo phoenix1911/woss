@@ -38,7 +38,7 @@ public class GatherImpl2 implements Gather {
 		int count = 0;
 
 //		获取文件相对路径字节流对象
-		InputStream resourceAsStream = this.getClass().getResourceAsStream("/file/radwtmp1000");
+		InputStream resourceAsStream = this.getClass().getResourceAsStream("/file/radwtmp");
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(resourceAsStream));
 
 		String string;
