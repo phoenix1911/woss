@@ -11,7 +11,9 @@ import java.util.Properties;
 import com.briup.util.BIDR;
 import com.briup.woss.server.Server;
 
+import util.BackUpImpl;
 import util.BasicConfigToolProperties;
+import woss.client.GatherImpl2;
 
 public class ServerImpl implements Server {
 	private ServerSocket serverSocket;
@@ -35,13 +37,12 @@ public class ServerImpl implements Server {
 //		System.out.println("开始进行反序列化！");
 		BIDR bidr = null;
 		try {
-			// 注意:当文件读取到末尾时 会报出EOFException的异常 将此异常捕获 而不是抛出 程序则可以正常运行
+			// 注意:当读取到末尾时 会报出EOFException的异常 将此异常捕获 而不是抛出 程序则可以正常运行
 			while ((bidr = (BIDR) ois.readObject()) != null) {
 				arrayList.add(bidr);
 			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
+		}catch (Exception e) {
+			new BackUpImpl().store("src/file/backup.txt", new GatherImpl2().gather(), false);
 			e.printStackTrace();
 		}
 		System.out.println("反序列化结束！");

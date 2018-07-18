@@ -19,7 +19,7 @@ public class ClientImpl implements Client {
 
 	@Override
 	public void send(Collection<BIDR> collection) throws Exception {
-		System.out.println("客户端");
+		System.out.println("-------客户端---------------");
 
 		String serverIP = BasicConfigToolProperties.getValue("ServerIP");
 		int port = Integer.valueOf(BasicConfigToolProperties.getValue("port"));

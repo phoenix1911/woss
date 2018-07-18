@@ -11,6 +11,7 @@ public class clientMain {
 		ClientImpl clientImpl = new ClientImpl();
 
 		try {
+			// ·¢ËÍ¼¯ºÏ
 			clientImpl.send(gatherImpl2.gather());
 		} catch (Exception e) {
 

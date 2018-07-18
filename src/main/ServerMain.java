@@ -16,7 +16,9 @@ public class ServerMain {
 
 		try {
 			Collection<BIDR> revicer = serverImpl.revicer();
+//			Èë¿â
 			dbStoreImpl.saveToDB(revicer);
+
 		} catch (Exception e) {
 
 			e.printStackTrace();
