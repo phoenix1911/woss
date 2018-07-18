@@ -10,6 +10,7 @@ import com.briup.util.BIDR;
 import com.briup.woss.server.DBStore;
 
 import util.ConnectionFactory;
+import woss.client.GatherImpl2;
 
 public class DBStoreImpl implements DBStore {
 
@@ -54,17 +55,17 @@ public class DBStoreImpl implements DBStore {
 		
 	}
 	
-//	public static void main(String[] args) {
-//		try {
-//			Collection<BIDR> gather = new GatherImpl2().gather();
-//			DBStoreImpl dbStoreImpl = new DBStoreImpl();
-//			dbStoreImpl.saveToDB(gather);
-//		} catch (Exception e) {
-//			
-//			e.printStackTrace();
-//		}
-//		
-//	}
+	public static void main(String[] args) {
+		try {
+			Collection<BIDR> gather = new GatherImpl2().gather();
+			DBStoreImpl dbStoreImpl = new DBStoreImpl();
+			dbStoreImpl.saveToDB(gather);
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		
+	}
 
 
 	
