@@ -32,7 +32,7 @@ public class DBStoreImpl implements DBStore {
 		String today= split[2];
 		String sql= "insert into T_DETAIL_"+today+" values(?,?,?,?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(sql);
-		System.out.println(collection+" "+ps);
+//		System.out.println(collection+" "+ps);
 		
 		for (BIDR bidr : collection) {
 			String AAA = bidr.getAAA_login_name();
@@ -55,17 +55,17 @@ public class DBStoreImpl implements DBStore {
 		
 	}
 	
-	public static void main(String[] args) {
-		try {
-			Collection<BIDR> gather = new GatherImpl2().gather();
-			DBStoreImpl dbStoreImpl = new DBStoreImpl();
-			dbStoreImpl.saveToDB(gather);
-		} catch (Exception e) {
-			
-			e.printStackTrace();
-		}
-		
-	}
+//	public static void main(String[] args) {
+//		try {
+//			Collection<BIDR> gather = new GatherImpl2().gather();
+//			DBStoreImpl dbStoreImpl = new DBStoreImpl();
+//			dbStoreImpl.saveToDB(gather);
+//		} catch (Exception e) {
+//			
+//			e.printStackTrace();
+//		}
+//		
+//	}
 
 
 	
