@@ -30,10 +30,7 @@ public class ClientImpl implements Client {
 		// 序列化流，利用输出流向文件中写入对象
 		ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
 		System.out.println("开始进行序列化！");
-		for (BIDR bidr : collection) {
-			// 写入获取到的BIDR对象到备份文件中
-			oos.writeObject(bidr);
-		}
+		oos.writeObject(collection);
 		System.out.println("序列化已结束！");
 
 		// 刷新缓冲

@@ -6,6 +6,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Properties;
 
 import com.briup.util.BIDR;
@@ -22,6 +23,7 @@ public class ServerImpl implements Server {
 	public void init(Properties arg0) {
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<BIDR> revicer() throws Exception {
 		System.out.println("服务器");
@@ -29,28 +31,22 @@ public class ServerImpl implements Server {
 		serverSocket = new ServerSocket(Integer.valueOf(port));
 		Socket socket = serverSocket.accept();
 		System.out.println("socket" + socket);
-		// 新建一个集合用于接收从备份文件中读取的BIDR对象
-		ArrayList<BIDR> arrayList = new ArrayList<>();
-		// 对象反序列化
-		// 反序列化流，利用输入流从文件中读取对象
-		ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-//		System.out.println("开始进行反序列化！");
-		BIDR bidr = null;
-		try {
-			// 注意:当读取到末尾时 会报出EOFException的异常 将此异常捕获 而不是抛出 程序则可以正常运行
-			while ((bidr = (BIDR) ois.readObject()) != null) {
-				arrayList.add(bidr);
-			}
-		}catch (Exception e) {
-			new BackUpImpl().store("src/file/backup.txt", new GatherImpl2().gather(), false);
-			e.printStackTrace();
-		}
+		
+		
+		System.out.println("反序列化开始！");
+		
+		ObjectInputStream objectinputStream = new ObjectInputStream(socket.getInputStream());
+		List<BIDR> list= (List<BIDR>)objectinputStream.readObject();
+//		for (BIDR bidr : list) {
+//			System.out.println(bidr.getLogin_ip());
+//		}
+		
 		System.out.println("反序列化结束！");
 
 		// 关闭资源
 		try {
-			if (ois != null)
-				ois.close();
+			if (objectinputStream != null)
+				objectinputStream.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -62,7 +58,7 @@ public class ServerImpl implements Server {
 		}
 
 		// 返回一个集合
-		return arrayList;
+		return list;
 	}
 
 	@Override
