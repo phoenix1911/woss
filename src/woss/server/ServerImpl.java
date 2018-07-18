@@ -4,17 +4,18 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
+
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 import com.briup.util.BIDR;
 import com.briup.woss.server.Server;
 
-import util.BackUpImpl;
 import util.BasicConfigToolProperties;
-import woss.client.GatherImpl2;
 
 public class ServerImpl implements Server {
 	private ServerSocket serverSocket;
@@ -26,14 +27,17 @@ public class ServerImpl implements Server {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<BIDR> revicer() throws Exception {
-		System.out.println("服务器");
+		//日志
+		Logger logger = Logger.getLogger(ServerImpl.class);
+		PropertyConfigurator.configure("src/util/log4j.properties");
+		
+		logger.info("服务器启动");
 		String port = BasicConfigToolProperties.getValue("port");
 		serverSocket = new ServerSocket(Integer.valueOf(port));
 		Socket socket = serverSocket.accept();
-		System.out.println("socket" + socket);
 		
-		
-		System.out.println("反序列化开始！");
+		logger.info("socket:"+ socket);
+		logger.warn("反序列化开始！");
 		
 		ObjectInputStream objectinputStream = new ObjectInputStream(socket.getInputStream());
 		List<BIDR> list= (List<BIDR>)objectinputStream.readObject();
@@ -41,7 +45,7 @@ public class ServerImpl implements Server {
 //			System.out.println(bidr.getLogin_ip());
 //		}
 		
-		System.out.println("反序列化结束！");
+		logger.warn("反序列化结束！");
 
 		// 关闭资源
 		try {

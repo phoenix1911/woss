@@ -6,6 +6,9 @@ import java.sql.PreparedStatement;
 import java.util.Collection;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+
 import com.briup.util.BIDR;
 import com.briup.woss.server.DBStore;
 
@@ -26,6 +29,10 @@ public class DBStoreImpl implements DBStore {
 	 */
 	@Override
 	public void saveToDB(Collection<BIDR> collection) throws Exception {
+		
+		Logger logger = Logger.getLogger(DBStoreImpl.class);
+		PropertyConfigurator.configure("src/util/log4j.properties");
+		
 		Connection connection = ConnectionFactory.getConnection();
 		//今天的日期
 		String[] split = new java.util.Date().toString().split(" ");
@@ -33,7 +40,7 @@ public class DBStoreImpl implements DBStore {
 		String sql= "insert into T_DETAIL_"+today+" values(?,?,?,?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(sql);
 //		System.out.println(collection+" "+ps);
-		
+		logger.warn("入库操作开始");
 		for (BIDR bidr : collection) {
 			String AAA = bidr.getAAA_login_name();
 			String login_ip = bidr.getLogin_ip();
@@ -49,9 +56,8 @@ public class DBStoreImpl implements DBStore {
 			ps.setString(5, nas_ip);
 			ps.setInt(6, time_deration);
 			ps.execute();
-			
-
 		}
+		logger.warn("入库操作结束");
 		
 	}
 	
