@@ -38,7 +38,7 @@ public class GatherImpl2 implements Gather {
 		int count = 0;
 
 //		获取文件相对路径字节流对象
-		InputStream resourceAsStream = this.getClass().getResourceAsStream("/file/radwtmp");
+		InputStream resourceAsStream = this.getClass().getResourceAsStream("/file/radwtmp1000");
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(resourceAsStream));
 
 		String string;
@@ -65,7 +65,7 @@ public class GatherImpl2 implements Gather {
 			// 如果遇见存在的IP且也是上线 在线计数器+1
 			else if (onlineNum.containsKey(split[4]) && Integer.valueOf(split[2]) == 7) {
 				onlineNum.put(split[4], onlineNum.get(split[4]) + 1);
-				System.out.println("计数器+1");
+//				System.out.println("计数器+1");
 			}
 			// 如果遇见存在的IP且也是上线 在线计数器-1
 			else if (Integer.valueOf(split[2]) == 8) {
@@ -84,16 +84,16 @@ public class GatherImpl2 implements Gather {
 					
 				}else {
 					onlineNum.put(split[4], onlineNum.get(split[4]) - 1);
-					System.out.println("计数器-1");					
+//					System.out.println("计数器-1");					
 				}
 			}
 			
 		}
-		for (BIDR bidr : list) {
-			System.out.println("AAA服务名:  " + bidr.getAAA_login_name() + "NAS服务器IP地址: " + bidr.getNAS_ip() + " 上线IP地址: "
-					+ bidr.getLogin_ip() + "上线时间: " + bidr.getLogin_date() + "下线时间: " + bidr.getLogout_date() + "上线时长: "
-					+ bidr.getTime_deration() + "秒");
-		}
+//		for (BIDR bidr : list) {
+//			System.out.println("AAA服务名:  " + bidr.getAAA_login_name() + "NAS服务器IP地址: " + bidr.getNAS_ip() + " 上线IP地址: "
+//					+ bidr.getLogin_ip() + "上线时间: " + bidr.getLogin_date() + "下线时间: " + bidr.getLogout_date() + "上线时长: "
+//					+ bidr.getTime_deration() + "秒");
+//		}
 
 		System.out.println("IP数" + list.size());
 		System.out.println("没有下线的IP:"+map.size());

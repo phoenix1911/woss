@@ -91,6 +91,7 @@ public class GatherImpl implements Gather {
 
 		System.out.println("没下线的:" + count);
 		System.out.println(count2);
+		System.out.println("END OF gather()");
 		return list;
 	}
 
