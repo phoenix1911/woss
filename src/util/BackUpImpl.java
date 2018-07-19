@@ -55,17 +55,16 @@ public class BackUpImpl implements BackUP {
 		objectOutputStream.writeObject(data);		
 		objectOutputStream.close();
 	}
-	/*public static void main(String[] args) throws Exception {
-//		String string = "src/file/test.txt";
-//		Collection<BIDR> gather = new GatherImpl2().gather();
-//		BackUpImpl backUpImpl = new BackUpImpl();
-//		backUpImpl.store(string, gather, true);
-//		backUpImpl.load(string,false);
+	public static void main(String[] args) throws Exception {
+		String string = "src/file/test.txt";
+		Collection<BIDR> gather = new GatherImpl2().gather();
+		BackUpImpl backUpImpl = new BackUpImpl();
+		backUpImpl.store(string, gather, true);
+		backUpImpl.load(string,false);
 		
-		≤‚ ‘œ‡∂‘¬∑æ∂
-		 * System.out.println(BackUpImpl.class.getResource("/woss"));
-		File file = new File("src/file/test.txt");
-		System.out.println(file.exists());
+//		System.out.println(BackUpImpl.class.getResource("/woss"));
+//		File file = new File("src/file/test.txt");
+//		System.out.println(file.exists());
 		
-	}*/
+	}
 }

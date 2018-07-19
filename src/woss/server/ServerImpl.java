@@ -16,9 +16,11 @@ import com.briup.util.BIDR;
 import com.briup.woss.server.Server;
 
 import util.BasicConfigToolProperties;
+import util.LoggerImpl;
 
 public class ServerImpl implements Server {
 	private ServerSocket serverSocket;
+	private LoggerImpl logger = new LoggerImpl();
 
 	@Override
 	public void init(Properties arg0) {
@@ -28,8 +30,8 @@ public class ServerImpl implements Server {
 	@Override
 	public Collection<BIDR> revicer() throws Exception {
 		//日志
-		Logger logger = Logger.getLogger(ServerImpl.class);
-		PropertyConfigurator.configure("src/util/log4j.properties");
+//		Logger logger = Logger.getLogger(ServerImpl.class);
+//		PropertyConfigurator.configure("src/util/log4j.properties");
 		
 		logger.info("服务器启动");
 		String port = BasicConfigToolProperties.getValue("port");
@@ -37,7 +39,7 @@ public class ServerImpl implements Server {
 		Socket socket = serverSocket.accept();
 		
 		logger.info("socket:"+ socket);
-		logger.warn("反序列化开始！");
+		logger.info("反序列化开始！");
 		
 		ObjectInputStream objectinputStream = new ObjectInputStream(socket.getInputStream());
 		List<BIDR> list= (List<BIDR>)objectinputStream.readObject();
@@ -45,7 +47,7 @@ public class ServerImpl implements Server {
 //			System.out.println(bidr.getLogin_ip());
 //		}
 		
-		logger.warn("反序列化结束！");
+		logger.info("反序列化结束！");
 
 		// 关闭资源
 		try {
