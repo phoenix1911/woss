@@ -2,7 +2,7 @@
 
 <woss>
 	<gather class="woss.client.GatherImpl2">
-		<data-file>src/com/briup/file/radwtmp</data-file>
+		<data-file>/file/radwtmp1000</data-file>
 	</gather>
 	
 	<client class="woss.client.ClientImpl">
@@ -16,9 +16,9 @@
 	
 	<dbstore class="woss.server.DBStoreImpl">
 		<driver>oracle.jdbc.driver.OracleDriver</driver>
-		<url>jdbc:oracle:thin:@localhost:1521:XE</url>
+		<url>jdbc:oracle:thin:@localhost:1521:ORACLE</url>
 		<username>briup</username>
-		<password>briup</password>
+		<password>123456</password>
 	</dbstore>
 	
 	<logger class="util.LoggerImpl">
@@ -28,4 +28,5 @@
 	<backup class="util.BackUpImpl">
 		<back-path>src/com/briup/file</back-path>
 	</backup>
+	
 </woss>

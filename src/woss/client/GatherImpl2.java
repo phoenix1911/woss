@@ -11,13 +11,37 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import org.apache.log4j.spi.LoggingEvent;
+
 import com.briup.util.BIDR;
+import com.briup.util.Configuration;
+import com.briup.util.Logger;
+import com.briup.woss.ConfigurationAWare;
 import com.briup.woss.client.Gather;
 
-public class GatherImpl2 implements Gather {
+import test.logger;
+
+public class GatherImpl2 implements Gather,ConfigurationAWare {
+	private Configuration conf;
+	private Logger logger;
+	private String datafile;
+	
+	@Override
+	public void setConfiguration(Configuration arg0) {
+		this.conf = arg0;
+	}
 
 	@Override
 	public void init(Properties arg0) {
+		
+		datafile = arg0.getProperty("data-file");
+		System.out.println("GatherImpl2 "+datafile);
+		try {
+			logger = conf.getLogger();
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
 	}
 
 	/*
@@ -38,7 +62,8 @@ public class GatherImpl2 implements Gather {
 		int count = 0;
 
 //		获取文件相对路径字节流对象
-		InputStream resourceAsStream = this.getClass().getResourceAsStream("/file/radwtmp");
+		InputStream resourceAsStream = this.getClass().getResourceAsStream(datafile);
+		System.out.println(resourceAsStream);
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(resourceAsStream));
 
 		String string;
