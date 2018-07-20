@@ -1,16 +1,12 @@
 package main;
 
-import java.io.File;
 import java.util.Collection;
 
 import com.briup.util.BIDR;
-import com.briup.util.BackUP;
 import com.briup.util.Logger;
 
-import test.logger;
 import util.BackUpImpl;
 import util.ConfigurationImpl;
-
 import woss.server.DBStoreImpl;
 import woss.server.ServerImpl;
 
@@ -33,9 +29,7 @@ public class ServerMain {
 			backUpImpl = (BackUpImpl) conf.getBackup();
 
 //			// 先将上一回出现异常没有插入到数据库的数据插入到数据库
-//			Object load = backUpImpl.load("src/file/backfile.txt", false);
-//			System.out.println(load);
-			if (new File(backfile).exists()) {
+			
 				Object obj = null;
 				if ((obj = backUpImpl.load(backfile, true)) != null) {
 					Collection<BIDR> coll = (Collection<BIDR>) obj;
@@ -45,7 +39,7 @@ public class ServerMain {
 					logger.info("备份文件数据入库成功...");
 //							System.out.println("备份文件数据入库成功...");
 				}
-			}
+			
 			// 接收从客户端的数据
 			revicer = serverImpl.revicer();
 			logger.info("服务器已接收数据集合 共" + revicer.size() + "条数据");

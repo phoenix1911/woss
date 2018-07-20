@@ -50,6 +50,13 @@ public class BackUpImpl implements BackUP,ConfigurationAWare{
 	@SuppressWarnings("unchecked")
 	@Override
 	public Object load(String key, boolean flag) throws Exception {
+		File file = new File(key);
+		if (!(file.exists() && file.canRead())) {
+			logger.info("暂时没有备份数据！");
+//			System.out.println("暂时没有备份数据！");
+			return null;
+		}
+		
 		ObjectInputStream objectinputStream= new ObjectInputStream(new FileInputStream(key));
 		List<BIDR> list2= (List<BIDR>) objectinputStream.readObject();
 		System.out.println(objectinputStream+"   "+list2);
@@ -59,8 +66,8 @@ public class BackUpImpl implements BackUP,ConfigurationAWare{
 			logger.debug("第"+(count++)+"条数据 "+bidr.getLogin_ip());
 		}
 		if(flag) {
-			File file = new File(key);
-			file.delete();
+			File file2 = new File(key);
+			file2.delete();
 		}
 		return list2;
 	}

@@ -13,7 +13,6 @@
 	<server class="woss.server.ServerImpl">
 		<port>9999</port>
 	</server>
-	
 	<dbstore class="woss.server.DBStoreImpl">
 		<driver>oracle.jdbc.driver.OracleDriver</driver>
 		<url>jdbc:oracle:thin:@localhost:1521:ORACLE</url>
