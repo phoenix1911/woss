@@ -1,5 +1,6 @@
 package util;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -9,7 +10,7 @@ public class BasicConfigToolProperties {
 	static {
 		properties = new Properties();
 		try {
-			properties.load(BasicConfigToolProperties.class.getResourceAsStream("basicConfigTool.properties"));
+			properties.load(new FileInputStream("src/file/basicConfigTool.properties"));
 		} catch (IOException e) {
 			
 			e.printStackTrace();
@@ -19,11 +20,10 @@ public class BasicConfigToolProperties {
 		return properties.getProperty(key);
 	}
 	
-//	test
+////	test
 //	public static void main(String[] args) throws IOException {
-//		Properties properties3 = new Properties();
-//		properties3.load(BasicConfigToolProperties.class.getResourceAsStream("basicConfigTool.properties"));
-//		System.out.println(properties3.getProperty("port"));
 //		
+//		System.out.println(BasicConfigToolProperties.getValue("port"));
+//		System.out.println(ConnectionFactory.getConnection());
 //	}
 }

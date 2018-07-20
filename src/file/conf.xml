@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<woss>
+	<gather class="woss.client.GatherImpl2">
+		<data-file>src/com/briup/file/radwtmp</data-file>
+	</gather>
+	
+	<client class="woss.client.ClientImpl">
+		<server-ip>127.0.0.1</server-ip>
+		<server-port>9999</server-port>
+	</client>
+	
+	<server class="woss.server.ServerImpl">
+		<port>9999</port>
+	</server>
+	
+	<dbstore class="woss.server.DBStoreImpl">
+		<driver>oracle.jdbc.driver.OracleDriver</driver>
+		<url>jdbc:oracle:thin:@localhost:1521:XE</url>
+		<username>briup</username>
+		<password>briup</password>
+	</dbstore>
+	
+	<logger class="util.LoggerImpl">
+		<log-pro>src/file/log4j.properties</log-pro>
+	</logger>
+	
+	<backup class="util.BackUpImpl">
+		<back-path>src/com/briup/file</back-path>
+	</backup>
+</woss>

@@ -5,25 +5,42 @@ import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
-
 import com.briup.util.BIDR;
+import com.briup.util.Configuration;
+import com.briup.util.Logger;
+import com.briup.woss.ConfigurationAWare;
 import com.briup.woss.server.Server;
 
-import util.BasicConfigToolProperties;
-import util.LoggerImpl;
-
-public class ServerImpl implements Server {
+public class ServerImpl implements Server,ConfigurationAWare{
+	//配置对象
+	private Configuration conf;
+	//日志对象
+	private Logger logger;
 	private ServerSocket serverSocket;
-	private LoggerImpl logger = new LoggerImpl();
+	
+	private String port;
+
+	@Override
+	public void setConfiguration(Configuration arg0) {
+		System.out.println(" serverimpl   setConfiguration()");
+		this.conf=arg0;
+	}
 
 	@Override
 	public void init(Properties arg0) {
+		port = arg0.getProperty("port");
+		System.out.println("serverImpl init() port "+port);
+		try {
+			logger = conf.getLogger();
+			System.out.println(logger);
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		
 	}
 
 	@SuppressWarnings("unchecked")
@@ -34,7 +51,6 @@ public class ServerImpl implements Server {
 //		PropertyConfigurator.configure("src/util/log4j.properties");
 		
 		logger.info("服务器启动");
-		String port = BasicConfigToolProperties.getValue("port");
 		serverSocket = new ServerSocket(Integer.valueOf(port));
 		Socket socket = serverSocket.accept();
 		

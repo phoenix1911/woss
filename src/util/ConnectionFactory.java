@@ -1,5 +1,6 @@
 package util;
 
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -16,7 +17,7 @@ public class ConnectionFactory {
 	static {
 		Properties properties = new Properties();
 		try {
-			properties.load(ConnectionFactory.class.getResourceAsStream("db.properties"));
+			properties.load(new FileInputStream("src/file/db.properties"));
 			driver = properties.getProperty("driver");
 			url = properties.getProperty("url");
 			user = properties.getProperty("user");

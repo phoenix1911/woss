@@ -11,13 +11,35 @@ import java.util.Properties;
 
 import com.briup.util.BIDR;
 import com.briup.util.BackUP;
+import com.briup.util.Configuration;
+import com.briup.util.Logger;
+import com.briup.woss.ConfigurationAWare;
 
 import woss.client.GatherImpl2;
 
-public class BackUpImpl implements BackUP {
+public class BackUpImpl implements BackUP,ConfigurationAWare{
+//	//备份文件路径
+//	private String backPath;
+	//配置对象
+	private Configuration configuration;
+	//日志对象
+	private Logger logger;
+	@Override
+	public void setConfiguration(Configuration arg0) {
+		this.configuration = arg0;
+	}
+	
 
 	@Override
 	public void init(Properties properties) {
+//		backPath = (String) properties.get("back-path");
+		try {
+			logger = configuration.getLogger();
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		System.out.println("BackUpImpl init()");
 	}
 
 	/**
@@ -31,9 +53,10 @@ public class BackUpImpl implements BackUP {
 		ObjectInputStream objectinputStream= new ObjectInputStream(new FileInputStream(key));
 		List<BIDR> list2= (List<BIDR>) objectinputStream.readObject();
 		objectinputStream.close();
-		int count=0;
+		int count=1;
+		logger.info("eeee");
 		for (BIDR bidr : list2) {
-			System.out.println((count++)+bidr.getLogin_ip());
+			logger.debug("第"+(count++)+"条数据 "+bidr.getLogin_ip());
 		}
 		if(flag) {
 			File file = new File(key);
@@ -55,16 +78,16 @@ public class BackUpImpl implements BackUP {
 		objectOutputStream.writeObject(data);		
 		objectOutputStream.close();
 	}
-	public static void main(String[] args) throws Exception {
-		String string = "src/file/test.txt";
-		Collection<BIDR> gather = new GatherImpl2().gather();
-		BackUpImpl backUpImpl = new BackUpImpl();
-		backUpImpl.store(string, gather, true);
-		backUpImpl.load(string,false);
-		
-//		System.out.println(BackUpImpl.class.getResource("/woss"));
-//		File file = new File("src/file/test.txt");
-//		System.out.println(file.exists());
-		
-	}
+//	public static void main(String[] args) throws Exception {
+//		String string = "src/file/test.txt";
+//		Collection<BIDR> gather = new GatherImpl2().gather();
+//		BackUpImpl backUpImpl = new BackUpImpl();
+//		backUpImpl.store(string, gather, true);
+//		backUpImpl.load(string,false);
+//		
+////		System.out.println(BackUpImpl.class.getResource("/woss"));
+////		File file = new File("src/file/test.txt");
+////		System.out.println(file.exists());
+//		
+//	}
 }

@@ -7,21 +7,19 @@ import org.apache.log4j.PropertyConfigurator;
 import com.briup.util.Logger;
 
 public class LoggerImpl implements Logger {
-	org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(LoggerImpl.class);
-	private static String path = "src/file/log4j.properties";
-	private static PropertyConfigurator propertyConfigurator;
-	static {
-		try {
-			propertyConfigurator = new PropertyConfigurator();
-			PropertyConfigurator.configure(path);
-		} catch (Exception e) {
+	// 获取 Logger对象
+	private org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(LoggerImpl.class);
+	private String logPro;
 
-			e.printStackTrace();
-		}
+	public LoggerImpl() {
 	}
 
 	@Override
 	public void init(Properties arg0) {
+		System.out.println("logger Impl()");
+		String logPro = arg0.getProperty("log-pro");
+//		System.out.println(logPro);
+		PropertyConfigurator.configure(logPro);
 
 	}
 
@@ -50,8 +48,7 @@ public class LoggerImpl implements Logger {
 		logger.warn(arg0);
 	}
 
-	public static void main(String[] args) {
-		LoggerImpl loggerImpl = new LoggerImpl();
-		loggerImpl.warn("3423423");
+	public static void main(String[] args) throws Exception {
+
 	}
 }
