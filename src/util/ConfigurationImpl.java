@@ -57,8 +57,8 @@ public class ConfigurationImpl implements Configuration {
 		for (Element element : rootBabyElements) {
 			String name = element.getName();
 			String value = element.attribute("class").getValue();
-			System.out.println(name);
-			System.out.println(value);
+//			System.out.println(name);
+//			System.out.println(value);
 
 			Class<?> class1 = Class.forName(value);
 			WossModule newInstance = (WossModule) class1.newInstance();
@@ -70,16 +70,16 @@ public class ConfigurationImpl implements Configuration {
 			for (Element element2 : elements) {
 				String name2 = element2.getName();
 				String text = element2.getText();
-				System.out.println("三级节点:" + name2 + " " + text);
+//				System.out.println("三级节点:" + name2 + " " + text);
 				properties.setProperty(name2, text);
-				System.out.println(properties.getProperty(name2));
+//				System.out.println(properties.getProperty(name2));
 //				properties.store(outputStream, name2);
 			}
 		}
 
-		System.out.println(map);
+//		System.out.println(map);
 
-		System.out.println(properties);
+//		System.out.println(properties);
 		for (String key : map.keySet()) {
 			WossModule woss = map.get(key);
 			// 初始化 配置对象

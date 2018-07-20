@@ -52,9 +52,9 @@ public class BackUpImpl implements BackUP,ConfigurationAWare{
 	public Object load(String key, boolean flag) throws Exception {
 		ObjectInputStream objectinputStream= new ObjectInputStream(new FileInputStream(key));
 		List<BIDR> list2= (List<BIDR>) objectinputStream.readObject();
+		System.out.println(objectinputStream+"   "+list2);
 		objectinputStream.close();
 		int count=1;
-		logger.info("eeee");
 		for (BIDR bidr : list2) {
 			logger.debug("第"+(count++)+"条数据 "+bidr.getLogin_ip());
 		}
@@ -62,7 +62,7 @@ public class BackUpImpl implements BackUP,ConfigurationAWare{
 			File file = new File(key);
 			file.delete();
 		}
-		return null;
+		return list2;
 	}
 
 	/**
@@ -74,20 +74,17 @@ public class BackUpImpl implements BackUP,ConfigurationAWare{
 	 */
 	@Override
 	public void store(String key, Object data, boolean flag) throws Exception {
+		System.out.println("backupimpl store()...");
 		ObjectOutputStream objectOutputStream =new ObjectOutputStream(new FileOutputStream(key,false));
 		objectOutputStream.writeObject(data);		
 		objectOutputStream.close();
 	}
 //	public static void main(String[] args) throws Exception {
-//		String string = "src/file/test.txt";
-//		Collection<BIDR> gather = new GatherImpl2().gather();
-//		BackUpImpl backUpImpl = new BackUpImpl();
-//		backUpImpl.store(string, gather, true);
-//		backUpImpl.load(string,false);
-//		
-////		System.out.println(BackUpImpl.class.getResource("/woss"));
-////		File file = new File("src/file/test.txt");
-////		System.out.println(file.exists());
-//		
+//		String string = "src/file/backfile.txt";
+//		ConfigurationImpl configurationImpl = new ConfigurationImpl();
+//		Collection<BIDR> gather = configurationImpl.getGather().gather();
+//		BackUP backup = configurationImpl.getBackup();
+////		backup.store(string, gather, false);
+//		backup.load(string, false);
 //	}
 }
